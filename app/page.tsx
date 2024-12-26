@@ -7,6 +7,7 @@ import { BackgroundTransition } from "@/components/background-transition"
 import { BackgroundText } from "@/components/background-text"
 import { X } from "lucide-react"
 import { DetailsOverlay } from "@/components/overlay"
+import { Button } from "@/components/ui/button"
 
 const leftNavItems = [
     {
@@ -249,6 +250,14 @@ export default function Home() {
             <BackgroundTransition />
             <BackgroundTriangles />
             <BackgroundText />
+            <div className="absolute w-full h-20 bottom-16 flex">
+                <Button
+                    className="mx-auto bg-white text-5xl font-extrabold h-14 hover:bg-gray-100"
+                    size={"lg"}
+                >
+                    <p className="text-5xl text-black py-4">Donate now!</p>
+                </Button>
+            </div>
             <div className="flex flex-col justify-between absolute h-full w-12 backdrop-blur-3xl left-0 top-0 bottom-0 border-r border-white/20 py-12 overflow-hidden">
                 {leftNavItems.map((item) => (
                     <p
