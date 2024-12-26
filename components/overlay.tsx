@@ -1,24 +1,28 @@
-"use client";
+"use client"
 
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
+import { motion } from "framer-motion"
+import { Button } from "@/components/ui/button"
+import { X } from "lucide-react"
 
-type OverlayProps = {
-    isOpen: boolean;
-    onClose: () => void;
-    content: string;
-};
+type DeatilsOverlayProps = {
+    isOpen: boolean
+    onClose: () => void
+    content: string
+}
 
-export function Overlay({ isOpen, onClose, content }: OverlayProps) {
+export function DetailsOverlay({
+    isOpen,
+    onClose,
+    content,
+}: DeatilsOverlayProps) {
     const variants = {
         open: { y: 0, opacity: 1 },
         closed: { y: "100%", opacity: 0 },
-    };
+    }
 
     return (
         <motion.div
-            className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-30"
+            className="fixed inset-0 backdrop-blur-xl flex items-center justify-center z-30"
             initial="closed"
             animate={isOpen ? "open" : "closed"}
             variants={variants}
@@ -33,13 +37,14 @@ export function Overlay({ isOpen, onClose, content }: OverlayProps) {
                     <X size={24} />
                 </button>
                 <div className="text-center">
-                    <h2 className="text-2xl font-bold text-gray-800 mb-4">Information</h2>
+                    <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                        Information
+                    </h2>
                     <p className="text-gray-700 leading-relaxed whitespace-pre-line">
                         {content}
                     </p>
                 </div>
             </div>
         </motion.div>
-    );
+    )
 }
-
