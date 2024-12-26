@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 type DetailsOverlayProps = {
     isOpen: boolean
     onClose: () => void
-    content: string
+    content: React.ReactNode
 }
 
 export function DetailsOverlay({
@@ -56,12 +56,11 @@ export function DetailsOverlay({
                         stiffness: 300,
                     }}
                     className="w-full max-w-lg"
+                    onClick={(e) => e.stopPropagation()}
                 >
                     <Card className="relative overflow-hidden bg-white/20 backdrop-blur-lg border border-white/30 shadow-xl">
-                        {/* Gradient overlay for glassmorphism effect */}
                         <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-white/30 to-transparent pointer-events-none" />
 
-                        {/* Close button with animation */}
                         <motion.button
                             className="absolute top-4 right-4 p-1 rounded-full bg-black/5 hover:bg-black/10 transition-colors cursor-pointer"
                             onClick={onClose}
@@ -77,13 +76,9 @@ export function DetailsOverlay({
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.1 }}
+                                className="prose prose-gray max-w-none"
                             >
-                                <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
-                                    Information
-                                </h2>
-                                <p className="text-gray-700 leading-relaxed whitespace-pre-line">
-                                    {content}
-                                </p>
+                                {content}
                             </motion.div>
                         </div>
                     </Card>
