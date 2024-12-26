@@ -226,10 +226,10 @@ const rightNavItems = [
                     Our Vision
                 </h2>
                 <div className="p-6 rounded-lg bg-white/30 text-center">
-                    <p className="text-xl font-medium text-gray-700 italic">
-                        &quote;We think to innovate - Join us in making this
-                        edition even greater than before!&quote;
-                    </p>
+                <p className="text-xl font-medium text-gray-800 italic">
+    "We strive to innovate—join us in making this edition our greatest one yet!"
+</p>
+
                 </div>
             </div>
         ),
