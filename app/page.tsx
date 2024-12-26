@@ -251,13 +251,15 @@ export default function Home() {
             <BackgroundTriangles />
             <BackgroundText />
             <div className="absolute w-full h-20 bottom-16 flex">
-                <Button
-                    className="mx-auto bg-white text-5xl font-extrabold h-14 hover:bg-gray-100"
-                    size={"lg"}
-                >
-                    <p className="text-5xl text-black py-4">Donate now!</p>
-                </Button>
-            </div>
+    <Button
+        className="mx-auto bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white text-2xl font-extrabold h-14 px-8 rounded-lg shadow-lg transform transition-transform duration-200 hover:scale-105"
+        size={"lg"}
+        onClick={() => window.open("https://milaap.org/fundraisers/support-student-community-2", "_blank")}
+    >
+        Donate Now!
+    </Button>
+</div>
+
             <div className="flex flex-col justify-between absolute h-full w-12 backdrop-blur-3xl left-0 top-0 bottom-0 border-r border-white/20 py-12 overflow-hidden">
                 {leftNavItems.map((item) => (
                     <p
