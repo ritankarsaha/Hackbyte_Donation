@@ -1,10 +1,11 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
 import { X } from "lucide-react"
+import { Card } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 
-type DeatilsOverlayProps = {
+type DetailsOverlayProps = {
     isOpen: boolean
     onClose: () => void
     content: string
@@ -14,36 +15,79 @@ export function DetailsOverlay({
     isOpen,
     onClose,
     content,
-}: DeatilsOverlayProps) {
-    const variants = {
-        open: { y: 0, opacity: 1 },
-        closed: { y: "100%", opacity: 0 },
+}: DetailsOverlayProps) {
+    const backdropVariants = {
+        open: { opacity: 1, y: 0 },
+        closed: { opacity: 0, y: "100%" },
+    }
+
+    const cardVariants = {
+        open: {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            rotateX: 0,
+        },
+        closed: {
+            y: "100%",
+            opacity: 1,
+            scale: 0.9,
+            rotateX: -10,
+        },
     }
 
     return (
         <motion.div
-            className="fixed inset-0 backdrop-blur-xl flex items-center justify-center z-30"
+            className={cn("fixed inset-0 z-30")}
             initial="closed"
             animate={isOpen ? "open" : "closed"}
-            variants={variants}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
+            variants={backdropVariants}
+            transition={{ duration: 0.3 }}
+            onClick={onClose}
         >
-            <div className="bg-gradient-to-br from-white via-gray-100 to-gray-200 p-6 md:p-8 rounded-2xl shadow-lg max-w-lg w-full relative border border-gray-300">
-                <button
-                    className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition-colors"
-                    onClick={onClose}
-                    aria-label="Close overlay"
+            <div className="absolute inset-0 bg-black/10 backdrop-blur-md" />
+
+            <div className="relative h-full w-full flex items-center justify-center p-4">
+                <motion.div
+                    variants={cardVariants}
+                    transition={{
+                        type: "spring",
+                        damping: 25,
+                        stiffness: 300,
+                    }}
+                    className="w-full max-w-lg"
                 >
-                    <X size={24} />
-                </button>
-                <div className="text-center">
-                    <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                        Information
-                    </h2>
-                    <p className="text-gray-700 leading-relaxed whitespace-pre-line">
-                        {content}
-                    </p>
-                </div>
+                    <Card className="relative overflow-hidden bg-white/20 backdrop-blur-lg border border-white/30 shadow-xl">
+                        {/* Gradient overlay for glassmorphism effect */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-white/30 to-transparent pointer-events-none" />
+
+                        {/* Close button with animation */}
+                        <motion.button
+                            className="absolute top-4 right-4 p-1 rounded-full bg-black/5 hover:bg-black/10 transition-colors cursor-pointer"
+                            onClick={onClose}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                            aria-label="Close overlay"
+                        >
+                            <X size={24} className="text-gray-700" />
+                        </motion.button>
+
+                        <div className="relative p-6 md:p-8">
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.1 }}
+                            >
+                                <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
+                                    Information
+                                </h2>
+                                <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                                    {content}
+                                </p>
+                            </motion.div>
+                        </div>
+                    </Card>
+                </motion.div>
             </div>
         </motion.div>
     )
